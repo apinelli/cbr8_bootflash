@@ -1,0 +1,17 @@
+---
+
+  - name: PLAY 1 - GET BOOTVAR DATA
+    hosts: cbr8
+    connection: local
+    gather_facts: no
+
+    tasks:
+
+      - name: TASK1 - GATHER HW
+        register: iosfacts_out
+        ios_facts:
+          gather_subset:
+            - "hardware"
+      - local_action: copy content={{ iosfacts_out }} dest=$HOME/cbr8_bootflash/bootflash/HW/bootflash_{{ inventory_hostname }}.txt
+
+
