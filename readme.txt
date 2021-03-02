@@ -8,6 +8,11 @@ $ cd ~
 Clone the repository:
 $ git clone https://github.com/apinelli/cbr8_bootflash.git
 
+Create a couple of directories:
+$ cd cbr8_bootflash
+$ mkdir bootflash/HW
+$ mkdir REPORTS
+
 Now run the playbook:
 $ ansible-playbook -i inventory_cisco gather_hw_cisco5_hw.yaml -u ww -k
 
