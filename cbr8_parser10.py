@@ -11,7 +11,7 @@ def Sort_Tuple(tup):
     return(sorted(tup, reverse=True, key = lambda x: x[1]))
 
 def gen_bootvar_report():  # Defines the function to generate a report for bootvar
-    folderpath = os.path.join(homepath, 'bootvar', 'HW')
+    folderpath = os.path.join(homepath, 'cbr8_bootflash/bootvar', 'HW')
     filepaths = [os.path.join(folderpath, name) for name in os.listdir(folderpath)]
     bootvar_list = []
     with open(path, 'r') as f:
@@ -55,12 +55,12 @@ def gen_bootflash_report(): # Defines a function to create a report on bootflash
     for path in filepaths:
         with open(path, 'r') as f:
             destino_dict = json.load(f)
-            spacefree = destino_dict['ansible_facts']['ansible_net_filesystems_info']['bootflash:']['spacefree_kb']
-            spacetotal = destino_dict['ansible_facts']['ansible_net_filesystems_info']['bootflash:']['spacetotal_kb']
-            hostname = destino_dict['ansible_facts']['ansible_net_hostname']
-            version = destino_dict['ansible_facts']['ansible_net_version']
+            spacefree = destino_dict["ansible_facts"]["ansible_net_filesystems_info"]["bootflash:"]["spacefree_kb"]
+            spacetotal = destino_dict["ansible_facts"]["ansible_net_filesystems_info"]["bootflash:"]["spacetotal_kb"]
+            hostname = destino_dict["ansible_facts"]["ansible_net_hostname"]
+            version = destino_dict["ansible_facts"]["ansible_net_version"]
             version_list.append(version)
-            occup = round((spacefree / spacetotal) * 100)
+            occup = round(((1 - spacefree/spacetotal)*100), 0)
             host_version_occup_tuple = (hostname, occup, version)
             all_list.append(host_version_occup_tuple)
             all_list_sorted = Sort_Tuple(all_list)
