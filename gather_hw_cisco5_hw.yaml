@@ -12,6 +12,19 @@
         ios_facts:
           gather_subset:
             - "hardware"
-      - local_action: copy content={{ iosfacts_out }} dest=$HOME/cbr8_bootflash/bootflash/HW/bootflash_{{ inventory_hostname }}.txt
+
+      - name: TASK2 - CREATE DIRECTORY 'bootflash/HW'
+        file:
+          path: "bootflash/HW"
+          state: directory
+        run_once: true
+
+      - name: TASK3 - CREATE DIRECTORY 'REPORTS'
+        file:
+          path: "REPORTS"
+          state: directory
+        run_once: true
+
+      - local_action: copy content={{ iosfacts_out }} dest={{ playbook_dir }}/bootflash/HW/bootflash_{{ inventory_hostname }}.txt
 
 
